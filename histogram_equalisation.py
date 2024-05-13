@@ -16,3 +16,30 @@ def histogram_equalization(image):
             equalized_image[i, j] = cdf[image[i, j]]
     
     return equalized_image.astype(np.uint8)
+
+
+def histogram(image):
+    hist = np.zeros(256, dtype=np.uint8)
+    for pixel_value in image.flatten():
+        hist[pixel_value] += 1
+    return hist
+
+hist_original = histogram(image)
+hist_equalized = histogram(he)
+
+plt.figure(figsize=(12, 6))
+
+plt.subplot(1, 2, 1)
+plt.plot(hist_original, color='b')
+plt.title('Original Image Histogram')
+plt.xlabel('Pixel Value')
+plt.ylabel('Frequency')
+
+plt.subplot(1, 2, 2)
+plt.plot(hist_equalized, color='r')
+plt.title('Equalized Image Histogram')
+plt.xlabel('Pixel Value')
+plt.ylabel('Frequency')
+
+plt.tight_layout()
+plt.show()
